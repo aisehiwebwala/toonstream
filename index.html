@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player</title>
+</head>
+<style>
+    .sea-sel,
+    .ep-sel {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+</style>
+
+<body>
+    <div >
+        <select name="" id="">
+            <option value="">Shinchan</option>
+            <option value="">Doraemon</option>
+        </select>
+    </div>
+    <video id="videoPlayer" src="https://worker-young-violet-1904.kirorop651.workers.dev/0:/Shinchan/Hindi/Shinchan S05E20 [RareToonsIndia].mkv" height="360" width="480" controls>
+    </video>
+    <div class="sel">
+        <div class="sea-sel">
+            <label id="sea_lbl" for="season">Season : 5</label>
+            <input type="range" name="season" id="season" min="1" max="8" value="5">
+        </div>
+        <div class="ep-sel">
+            <label id="ep_lbl" for="season">Episode : 20</label>
+            <input type="range" name="season" id="episode" min="1" max="52" value="20">
+        </div>
+        <button id="play_btn">Play</button>
+        <button id="full_btn">FullScreen</button>
+    </div>
+
+    <script>
+        const season = document.getElementById("season");
+        const episode = document.getElementById("episode");
+        const play_btn = document.getElementById("play_btn");
+        const full_btn = document.getElementById("full_btn");
+        const sea_lbl = document.getElementById("sea_lbl");
+        const ep_lbl = document.getElementById("ep_lbl");
+        const videoPlayer = document.getElementById("videoPlayer");
+
+        let season_num = 5;
+        let episode_num = 20;
+
+        function twoDigit(number) {
+            var twodigit = number >= 10 ? number : "0" + number.toString();
+            return twodigit;
+        }
+
+        season.addEventListener("input", (e) => {
+            season_num = e.target.value;
+            sea_lbl.innerText =`Season : ${season_num}`;
+        })
+        episode.addEventListener("input", (e) => {
+            episode_num = e.target.value;
+            ep_lbl.innerText =`Episode : ${episode_num}`;
+        })
+
+        play_btn.addEventListener("click", () => {
+            videoPlayer.src = `https://worker-young-violet-1904.kirorop651.workers.dev/0:/Shinchan/Hindi/Shinchan S${twoDigit(season_num)}E${twoDigit(episode_num)} [RareToonsIndia].mkv`;
+            videoPlayer.play();
+        })
+
+        full_btn.addEventListener("click",()=>{
+            videoPlayer.requestFullscreen();
+        })
+    </script>
+
+</body>
+
+</html>
